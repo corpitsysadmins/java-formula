@@ -33,13 +33,13 @@
 
 {% endif %}
 
-adoptopenjdk_install:
+java_adoptopenjdk_install:
   pkg.installed:
     - pkgs: {{ adoptopenjdk.package_list }}
 
 {% else %}
 
-adoptopenjdk_uninstall:
+java_adoptopenjdk_uninstall:
   pkg.removed:
     - pkgs: {{ adoptopenjdk.package_list }}
 
@@ -50,7 +50,7 @@ adoptopenjdk_uninstall:
 
 {% elif adoptopenjdk.package_manager_type == 'yum' %}
 
-adoptopenjdk_repo_remove:
+java_adoptopenjdk_repo_remove:
   file.missing:
     - name: {{ adoptopenjdk.yum_repo_file }}
 
