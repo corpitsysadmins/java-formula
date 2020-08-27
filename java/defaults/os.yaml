@@ -1,0 +1,18 @@
+Amazon:
+  adoptopenjdk:
+    os_path: amazonlinux
+CentOS:
+  adoptopenjdk:
+    os_path: centos
+Fedora:
+  adoptopenjdk:
+    os_path: fedora
+openSUSE:
+  adoptopenjdk:
+    os_path: opensuse
+RedHat:
+  adoptopenjdk:
+    os_path: rhel
+Suse:
+  adoptopenjdk:
+    os_path: sles

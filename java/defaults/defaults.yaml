@@ -1,0 +1,5 @@
+adoptopenjdk:
+  package_manager_type: source
+  package_list:
+    - adoptopenjdk-14-hotspot-jre
+  yum_repo_file: /etc/yum.repos.d/adoptopenjdk.repo

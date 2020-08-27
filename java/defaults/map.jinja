@@ -1,0 +1,14 @@
+{% import_yaml 'java/defaults/defaults.yaml' as defaults %}
+{% import_yaml 'java/defaults/osfamily.yaml' as osfamily %}
+{% import_yaml 'java/defaults/os.yaml' as os %}
+{% import_yaml 'java/defaults/osfinger.yaml' as osfinger %}
+
+{% set java = salt['slsutil.merge'](defaults,
+    salt['grains.filter_by'](osfamily, grain = 'os_family',
+      merge = salt['grains.filter_by'](os, grain = 'os',
+        merge = salt['grains.filter_by'](osfinger, grain = 'osfinger',
+          merge = salt['pillar.get']('java')
+        )
+      )
+    )
+) %}

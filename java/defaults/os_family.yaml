@@ -1,0 +1,9 @@
+Debian:
+  adoptopenjdk:
+    package_manager_type: apt
+RedHat:
+  adoptopenjdk:
+    package_manager_type: yum
+Suse:
+  adoptopenjdk:
+    package_manager_type: zypper
