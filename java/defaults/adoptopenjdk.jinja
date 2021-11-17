@@ -1,18 +1,17 @@
 
 {% import_yaml 'java/defaults/defaults.yaml' as defaults %}
 {% if defaults.adoptopenjdk is defined %}
-{% set data = defaults.adoptopenjdk %}
+	{% set adoptopenjdk = defaults.adoptopenjdk %}
 {% else %}
-{% set data = {} %}
+	{% set adoptopenjdk = {} %}
 {% endif %}
 
-{%- for grain in ['os_family', 'os', 'osfinger'] %}
-{% import_yaml 'java/defaults/' ~ grain ~ '.yaml' as lookup_dict %}
-{% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain) %}
-{% if filtered_data.adoptopenjdk is defined %}
-{% set data = salt['slsutil.merge'](data, filtered_data.adoptopenjdk) %}
-{% endif %}
-{%- endfor %}
+{% for grain in ['os_family', 'os', 'osfinger'] %}
+	{% import_yaml 'java/defaults/' ~ grain ~ '.yaml' as lookup_dict %}
+	{% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain) %}
+	{% if filtered_data.adoptopenjdk is defined %}
+		{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, filtered_data.adoptopenjdk) %}
+	{% endif %}
+{% endfor %}
 
-{% set data = salt['slsutil.merge'](data, salt['pillar.get']('java:adoptopenjdk', default = {})) %}
-{% set adoptopenjdk = data %}
+{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, salt['pillar.get']('java:adoptopenjdk', default = {})) %}
