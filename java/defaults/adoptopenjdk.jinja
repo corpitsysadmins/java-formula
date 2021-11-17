@@ -10,7 +10,7 @@
 {% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {'grain_files' : grain_files}) %}
 
 {% for grain_file in grain_files %}
-	{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {grain_file : True}) %}
+	{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {'looping' : 'loop'}) %}
 	{#% import_yaml 'java/defaults/' ~ grain_file ~ '.yaml' as lookup_dict %#}
 	{#% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain_file) %#}
 	{#% if filtered_data.adoptopenjdk is defined %#}
