@@ -1,0 +1,19 @@
+
+{% set ns = namespace(data = {}) %}
+
+{% if default_sources['defaults']|default(false) %}
+	{% import_yaml default_sources['module'] ~ '/defaults/defaults.yaml' as defaults %}
+	{% set ns.data = salt['slsutil.merge'](ns.data, defaults[default_sources['submodule']]|default({})) %}
+{% endif %}
+
+{% for grain_ in default_sources['grains']|default([]) %}
+	{% import_yaml default_sources['module'] ~ '/defaults/' ~ grain_ ~ '.yaml' as lookup_dict %}
+	{% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain_) %}
+	{% set ns.data = salt['slsutil.merge'](ns.data, filtered_data[default_sources['submodule']]|default({})) %}
+{% endfor %}
+
+{% if default_sources['pillar']|default(false) %}
+	{% set ns.data = salt['slsutil.merge'](ns.data, salt['pillar.get']('%s:%s'|format(default_sources['module'], default_sources['submodule']), default = {})) %}
+{% endif %}
+
+{% set config = ns.data %}

@@ -1,8 +1,6 @@
 
-{% set module_name = 'java' %}
-{% set submodule_name = 'adoptopenjdk' %}
-
-{% from "./defaults/adoptopenjdk.jinja" import data as adoptopenjdk with context %}
+{% set default_sources = {'module' : 'java', 'submodule' : 'adoptopenjdk', 'defaults' : True, 'pillar' : True, 'grains' : ['os_family', 'os', 'osfinger']} %}
+{% from "./defaults/load_config.jinja" import config as adoptopenjdk with context %}
 
 # {{ adoptopenjdk }}
 
