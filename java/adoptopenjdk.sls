@@ -20,6 +20,7 @@
     - template: jinja
     - context:
         os_path: {{ adoptopenjdk.os_path }}
+        arch_path: {{ adoptopenjdk.arch_path }}
     - user: root
     - group: root
     - mode: 644

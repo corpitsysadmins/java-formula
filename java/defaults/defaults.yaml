@@ -1,4 +1,5 @@
 adoptopenjdk:
-  package_manager_type: source
+  arch_path: "$(uname -m)"
   package_list:
     - adoptopenjdk-14-hotspot-jre
+  package_manager_type: source
