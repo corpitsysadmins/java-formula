@@ -2,8 +2,6 @@
 {% set default_sources = {'module' : 'java', 'submodule' : 'adoptopenjdk', 'defaults' : True, 'pillar' : True, 'grains' : ['os_family', 'os', 'osfinger']} %}
 {% from "./defaults/load_config.jinja" import config as adoptopenjdk with context %}
 
-# {{ adoptopenjdk }}
-
 {% if adoptopenjdk.use is defined %}
 
 {% if adoptopenjdk.use | to_bool %}

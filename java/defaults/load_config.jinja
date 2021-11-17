@@ -6,9 +6,9 @@
 	{% set ns.data = salt['slsutil.merge'](ns.data, defaults[default_sources['submodule']]|default({})) %}
 {% endif %}
 
-{% for grain_ in default_sources['grains']|default([]) %}
-	{% import_yaml default_sources['module'] ~ '/defaults/' ~ grain_ ~ '.yaml' as lookup_dict %}
-	{% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain_) %}
+{% for grain in default_sources['grains']|default([]) %}
+	{% import_yaml default_sources['module'] ~ '/defaults/' ~ grain ~ '.yaml' as lookup_dict %}
+	{% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain) %}
 	{% set ns.data = salt['slsutil.merge'](ns.data, filtered_data[default_sources['submodule']]|default({})) %}
 {% endfor %}
 
