@@ -4,6 +4,7 @@ Debian:
 RedHat:
   adoptopenjdk:
     package_manager_type: yum
+    yum_repo_file: /etc/yum.repos.d/adoptopenjdk.repo
 Suse:
   adoptopenjdk:
     package_manager_type: zypper
