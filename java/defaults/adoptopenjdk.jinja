@@ -17,6 +17,6 @@
 	{% set ns.data = salt['slsutil.merge'](ns.data, filtered_data[submodule_name]|default({})) %}
 {% endfor %}
 
-{#% set ns.data = salt['slsutil.merge'](ns.data, salt['pillar.get']('java:adoptopenjdk', default = {})) %#}
+{% set ns.data = salt['slsutil.merge'](ns.data, salt['pillar.get']('%s:%s'|format(module_name, submodule_name), default = {})) %}
 
 {% set adoptopenjdk = ns.data %}
