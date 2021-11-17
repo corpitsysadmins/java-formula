@@ -12,12 +12,9 @@
 {% endif %}
 
 {% for grain_file in grain_files %}
-	{% set ns.data = salt['slsutil.merge'](ns.data, {grain_file : True}) %}
-	{#% import_yaml 'java/defaults/' ~ grain_file ~ '.yaml' as lookup_dict %#}
-	{#% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain_file) %#}
-	{#% if filtered_data.adoptopenjdk is defined %#}
-		{#% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, filtered_data.adoptopenjdk) %#}
-	{#% endif %#}
+	{% import_yaml module_name ~ '/defaults/' ~ grain_file ~ '.yaml' as lookup_dict %}
+	{% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain_file) %}
+	{% set ns.data = salt['slsutil.merge'](ns.data, filtered_data[submodule_name]|default({})) %}
 {% endfor %}
 
 {#% set ns.data = salt['slsutil.merge'](ns.data, salt['pillar.get']('java:adoptopenjdk', default = {})) %#}
