@@ -7,6 +7,8 @@
 	{% set adoptopenjdk = {} %}
 {% endif %}
 
+{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {'grain_files' : grain_files}) %}
+
 {% for grain_file in grain_files %}
 	{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {grain_file : True}) %}
 	{#% import_yaml 'java/defaults/' ~ grain_file ~ '.yaml' as lookup_dict %#}
