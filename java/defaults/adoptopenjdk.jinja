@@ -8,7 +8,7 @@ data = namespace(content = {})
 
 {% if load_default %}
 	{% import_yaml module_name ~ '/defaults/defaults.yaml' as defaults %}
-	{% set data.content = salt['slsutil.merge'](data.content, defaults[submodule_name]|default({})) %}
+	{% set data.content = salt['slsutil.merge'](data.content, defaults.adoptopenjdk) %}
 {% endif %}
 
 {% for grain_file in grain_files %}
