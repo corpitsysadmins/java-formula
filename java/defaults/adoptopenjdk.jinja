@@ -7,11 +7,12 @@
 {% endif %}
 
 {% for grain in ['os_family', 'os', 'osfinger'] %}
-	{% import_yaml 'java/defaults/' ~ grain ~ '.yaml' as lookup_dict %}
-	{% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain) %}
-	{% if filtered_data.adoptopenjdk is defined %}
-		{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, filtered_data.adoptopenjdk) %}
-	{% endif %}
+	{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {grain : True} %}
+	{#% import_yaml 'java/defaults/' ~ grain ~ '.yaml' as lookup_dict %#}
+	{#% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain) %#}
+	{#% if filtered_data.adoptopenjdk is defined %#}
+		{#% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, filtered_data.adoptopenjdk) %#}
+	{#% endif %#}
 {% endfor %}
 
 {% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, salt['pillar.get']('java:adoptopenjdk', default = {})) %}
