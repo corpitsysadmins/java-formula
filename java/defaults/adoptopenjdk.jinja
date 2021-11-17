@@ -7,7 +7,7 @@
 {% endif %}
 
 {% for grain in ['os_family', 'os', 'osfinger'] %}
-	{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {grain : True} %}
+	{% set adoptopenjdk = salt['slsutil.merge'](adoptopenjdk, {grain : True}) %}
 	{#% import_yaml 'java/defaults/' ~ grain ~ '.yaml' as lookup_dict %#}
 	{#% set filtered_data = salt['grains.filter_by'](lookup_dict, grain = grain) %#}
 	{#% if filtered_data.adoptopenjdk is defined %#}
