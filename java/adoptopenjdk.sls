@@ -1,6 +1,8 @@
 
 {% from "./defaults/adoptopenjdk.jinja" import adoptopenjdk with context %}
 
+# {{ adoptopenjdk }}
+
 {% if adoptopenjdk.use is defined %}
 
 {% if adoptopenjdk.use | to_bool %}
