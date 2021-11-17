@@ -1,6 +1,6 @@
 
 {% if default_sources['module'] is string %}
-	{% set default_sources['module'] = [default_sources['module']] %}
+	{% do default_sources.__setitem__('module', [default_sources['module']]) %}
 {% endif %}
 
 {% set config = namespace(values = {}) %}
