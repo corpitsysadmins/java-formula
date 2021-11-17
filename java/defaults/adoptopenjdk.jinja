@@ -1,6 +1,4 @@
 
-{% set module_name = 'java' %}
-{% set submodule_name = 'adoptopenjdk' %}
 {% set grain_files = ['os_family', 'os', 'osfinger'] %}
 {% set load_default = True %}
 
@@ -18,5 +16,3 @@
 {% endfor %}
 
 {% set ns.data = salt['slsutil.merge'](ns.data, salt['pillar.get']('%s:%s'|format(module_name, submodule_name), default = {})) %}
-
-{% set adoptopenjdk = ns.data %}

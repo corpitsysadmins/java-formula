@@ -1,5 +1,8 @@
 
-{% from "./defaults/adoptopenjdk.jinja" import adoptopenjdk with context %}
+{% set module_name = 'java' %}
+{% set submodule_name = 'adoptopenjdk' %}
+
+{% from "./defaults/adoptopenjdk.jinja" import ns.data as adoptopenjdk with context %}
 
 # {{ adoptopenjdk }}
 
