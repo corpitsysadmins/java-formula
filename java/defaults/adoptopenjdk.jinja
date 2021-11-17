@@ -1,10 +1,10 @@
 
 {% set grain_files = ['os_family', 'os', 'osfinger'] %}
-{% set load_default = True %}
+{% set load_defaults = True %}
 
 {% set ns = namespace(data = {}) %}
 
-{% if load_default %}
+{% if load_defaults %}
 	{% import_yaml module_name ~ '/defaults/defaults.yaml' as defaults %}
 	{% set ns.data = salt['slsutil.merge'](ns.data, defaults[submodule_name]|default({})) %}
 {% endif %}
@@ -16,3 +16,5 @@
 {% endfor %}
 
 {% set ns.data = salt['slsutil.merge'](ns.data, salt['pillar.get']('%s:%s'|format(module_name, submodule_name), default = {})) %}
+
+{% set data = ns.data %}

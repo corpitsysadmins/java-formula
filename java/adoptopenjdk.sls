@@ -2,7 +2,7 @@
 {% set module_name = 'java' %}
 {% set submodule_name = 'adoptopenjdk' %}
 
-{% from "./defaults/adoptopenjdk.jinja" import ns.data as adoptopenjdk with context %}
+{% from "./defaults/adoptopenjdk.jinja" import data as adoptopenjdk with context %}
 
 # {{ adoptopenjdk }}
 
@@ -20,7 +20,7 @@
 
 {{ adoptopenjdk.yum_repo_file }}:
   file.managed:
-    - source: salt://adoptopenjdk/adoptopenjdk.repo.jinja
+    - source: salt://java/adoptopenjdk.repo.jinja
     - template: jinja
     - context:
         os_path: {{ adoptopenjdk.os_path }}
