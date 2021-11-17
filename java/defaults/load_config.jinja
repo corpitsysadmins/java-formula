@@ -1,6 +1,6 @@
 
 {% if default_sources['module'] is string %}
-	{% do default_sources.__setitem__('module', [default_sources['module']]) %}
+	{% set default_sources = salt['slsutil.merge'](default_sources, {'module' : [default_sources['module']]}) %}
 {% endif %}
 
 {% set config = namespace(values = {}) %}
@@ -25,7 +25,7 @@
 {% endfor %}
 
 {% if default_sources['pillar']|default(false) %}
-	{% set inner.values = salt['slsutil.merge'](inner.values, salt['pillar.get'](default_sources['module']|join(':'), default = {})) %}
+	{% set config.values = salt['slsutil.merge'](config.values, salt['pillar.get'](default_sources['module']|join(':'), default = {})) %}
 {% endif %}
 
 {% set config = config.values %}
